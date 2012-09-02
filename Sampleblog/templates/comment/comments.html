@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block webStylez %}
+  <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/docs.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}js/google-code-prettify/prettify.css" rel="stylesheet">
+<title>Mando Blog</title>
+{% endblock %}
+
+{% block commentForms %}
+  <ul>
+  <h1>Comment!</h1>
+  </ul>
+  <form method="post" action="{% url comment %}">
+    {% csrf_token %}
+    <ul>
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="email" name="email" placeholder="email(not required)"><br>
+          <div class="controls">
+            <textarea class="input-xlarge" name="text"  id="textarea" rows="3"></textarea>
+          </div>
+        <input class="btn btn-primary" type="submit" value="Add Post"> - {% if Error %}{{ Error }}{% endif %}<br>
+    </ul>
+  </form>
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped" width=400px>
+    {% if Post %}
+      {% for i  in Post %}
+        <tr><td>
+        <a href="/comment/allcomments/{{ i.name }}/all/">{{ i.name }}</a> - said on  <small><small>{{ i.cDate }}</small></small>...
+        </td></tr>
+        <tr><td>
+        {{ i.text }}
+        </td></tr>
+      {% endfor %}
+    {% else %}<h1>Be the first to comment!</h1>
+    {% endif %}
+{% endblock content%}

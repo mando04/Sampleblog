@@ -9,6 +9,8 @@
 {% endblock %}
 
 {% block commentForms %}
+  {% if user.is_authenticated %}
+
   <ul>
   <h1>Comment!</h1>
   </ul>
@@ -23,6 +25,9 @@
         <input class="btn btn-primary" type="submit" value="Add Post"> - {% if Error %}{{ Error }}{% endif %}<br>
     </ul>
   </form>
+  {% else %}
+    <p>You must be signed in to post</p>
+  {% endif %}
 {% endblock %}
 
 {% block content %}

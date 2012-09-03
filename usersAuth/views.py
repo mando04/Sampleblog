@@ -17,3 +17,6 @@ def usersRegister(request):
         context = {'form': form }
         return render_to_response('register.html', context, context_instance=RequestContext(request))
 
+def login(request):
+    HttpResponseRedirect('/')
+

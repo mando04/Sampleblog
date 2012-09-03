@@ -30,9 +30,11 @@
      <li class="nav-header">
       Blog
       </li>
+      {% if user.is_authenticated %}{% else %}
       <li>
-        <a href="{% url register %}">Sign up</a>
+        <a href="{% url login %}">Log in</a>
       </li>
+      {% endif %}
       </ul>
    </div>
    {% endblock rightNav %}

@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Context
 import datetime,sys,os
 from blog.models import blogPost, Author
+from usersAuth.models import userAccount
 from django.db import IntegrityError
 
 def index(request):

@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.index', name='home'),
-    url(r'^register/$', 'usersAuth.views.userRegister'),
+    url(r'^register/$', 'usersAuth.views.usersRegister', name='register'),
     url(r'^posts/(?P<userName>[-\w]+)/all/$', 'blog.views.allUserPosts'),
     url(r'^comment/allcomments/(?P<commentName>[-\w]+)/all/$', 'comment.views.allUserComments'),
     url(r'^comment/comments.html$', 'comment.views.index', name='comment'),

@@ -112,6 +112,9 @@ TEMPLATE_DIRS = (
     ''+appPath+'/templates'
 )
 
+# privide out get_profile()
+AUTH_PROFILE_MODULE = 'userAuth.userAccount'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,6 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'comment',
     'blog',
+    'usersAuth',
 )
 
 # A sample logging configuration. The only tangible logging

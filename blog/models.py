@@ -7,7 +7,7 @@ class Author(models.Model):
     aEmail = models.EmailField(blank=True)
 
     def __unicode__(self):
-        return u"%s %s %s" % (self.fname, self.lname, self.aEmail)
+        return u"%s %s - %s" % (self.fname, self.lname, self.aEmail)
     
 class blogPost(models.Model):
     blogDate = models.DateTimeField(auto_now=True, auto_now_add=True)

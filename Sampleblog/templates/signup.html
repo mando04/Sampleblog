@@ -1,41 +1,4 @@
-<html>
-<head>
-<title></title>
-<link href="/static/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
-</head>
-<body>
-<div class="row-fluid">
-   <div class="span2"><code>{{ ip }}<br></code><P>
-     <button class="btn-mini" type="submit">
-     Button
-     </button><P>
-    <ul class="nav nav-list">
-     <li class="nav-header">
-       Navigation
-      </li>
-      <li>
-        <a href="/">Home</a>
-      </li>
-      <li>
-        <a href="/blog">Blog</a>
-      </li>
-      </ul>
-   </div>
-   <div class="span10">...
-      <form name="input" action="/blog/createUser" method="post">{% csrf_token %}
-        {{ f }}
-        <input type="submit" value="Submit" />
-      </form>
-      {% if error %} {{ error }} {% endif %}
-      <p>
-      {% if g %} {{ g }} {% endif %}
-   </div>
-</div>
-</body>
-</html>
+{% extends "base.html" %)
+{% block content %}
+{{ forms }}
+{% endblock content %}

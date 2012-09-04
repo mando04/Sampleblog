@@ -9,9 +9,8 @@ def usersRegister(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     if request.method == ['POST']:
-        user = userAccount(bday=request.POST['bday'])
-        user.name(request.POST['name'])
-        
+        pass
+    
     else:
         """ user is not submitting a form Show blank form"""
         form = RegisterForm()

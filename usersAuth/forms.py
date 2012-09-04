@@ -5,8 +5,8 @@ from usersAuth.models import userAccount
 
 class RegisterForm(ModelForm):
     username = forms.CharField(label=(u'User Name'))
-    bday = forms.DateField(label=(u'Birhday'))
     email = forms.EmailField(label=(u'Email address'))
+    bday = forms.DateField(label=(u'Birthdate'))
     password = forms.CharField(label=(u'Password'), widget=forms.PasswordInput(render_value=False))
     password1 = forms.CharField(label=(u'Password'), widget=forms.PasswordInput(render_value=False))
  

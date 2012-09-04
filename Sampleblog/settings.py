@@ -113,7 +113,7 @@ TEMPLATE_DIRS = (
 )
 
 # privide out get_profile()
-AUTH_PROFILE_MODULE = 'userAuth.userAccount'
+AUTH_PROFILE_MODULE = 'usersAuth.userAccount'
 
 INSTALLED_APPS = (
     'django.contrib.auth',

@@ -6,15 +6,15 @@ from django.contrib.auth.models import User
 
 class userAccount(models.Model):
     user = models.OneToOneField(User)
-    bday = models.DateField()
     name = models.CharField(max_length=100)
+    bday = models.DateField()
     email = models.EmailField()
 
     def __unicode__(self):
         return self.name
 
 # create user object
-def createUserCallBack(sender, instance, **kwards):
-    user, new = userAccount.objects.get_or_create(user=instance)
-post_save.connect(createUserCallBack, User)
+#def createUserCallBack(sender, instance, **kwards):
+#    user, new = userAccount.objects.get_or_create(user=instance)
+#post_save.connect(createUserCallBack, User)
 

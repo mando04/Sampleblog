@@ -8,9 +8,10 @@
   </script>
   {% else %}
   <form name="submit" action="{% url login %}" method="POST">{% csrf_token %}
-  {{ form }}
+  Username:<br>{{ form.username }}<br>
+  Password:<br>{{ form.password }}
   <br>
-  <input class="btn btn-primary" type="submit" value="Login">
+  <input class="btn btn-primary" type="submit" value="Login"> - <small><a href="/login/forgotpassword">forgot password</a> or <a href="{% url register %}">	Sign up</a>
   </form><br>
   {% if error %}<strong>Username/Password incorrect!</strong>{% endif %}
   {% endif %}

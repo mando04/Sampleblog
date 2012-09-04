@@ -4,6 +4,7 @@ from django.template import RequestContext
 from usersAuth.forms import RegisterForm, loginUserForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from usersAuth.models import userAccount
 
 def usersRegister(request):
     if request.user.is_authenticated():
@@ -15,11 +16,12 @@ def usersRegister(request):
                                             email=form.cleaned_data['email'], \
                                             password=form.cleaned_data['password'])
             user.save()
-            USER = user.get_profile()
-            USER.name = form.cleaned_data['name']
-            USER.bday = form.cleaned_data['bday']
-            USER.email = form.cleaned_data['email']
-            USER.save()
+            
+            USER_P = userAccount(user=user, name=form.cleaned_data['name'], \
+                                 bday=form.cleaned_data['bday'], \
+                                 email=form.cleaned_data['email'])
+            USER_P.save()
+            
             return HttpResponseRedirect('/loggedin')
         else:
             return render_to_response('register.html', { 'form':form }, context_instance=RequestContext(request))    
@@ -30,19 +32,25 @@ def usersRegister(request):
         return render_to_response('register.html', context, context_instance=RequestContext(request))
 
 def loginUser(request):
-    form = loginUserForm()
-    context = {'form': form }
-   
+    context = {'form': loginUserForm }
+    
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
+        form = loginUserForm(request.POST)
+        if form.is_valid():
+            user = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=user, \
+                                password=password)
+        else:
+            return render_to_response('login.html', { 'form':form }, context_instance=RequestContext(request))
+        if user != None:
             if user.is_active:
                 login(request, user)
-                
                 # Redirect to a Success page
-                HttpResponseRedirect('/')
+                return HttpResponseRedirect('/')
             else:
                 error = "Account is diabled please email the Site Administrator"
                 #return a 'disabled account' error message
@@ -53,15 +61,11 @@ def loginUser(request):
             context.update({'error':error})
             # return an 'invalid login' error page
             return render_to_response('login.html', context, context_instance=RequestContext(request))
-        HttpResponseRedirect('/')
-
+        
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     
     return render_to_response('login.html', context, context_instance=RequestContext(request))
- 
 def logoutUser(request):
     logout(request)
     return HttpResponseRedirect('/')
-        
-            

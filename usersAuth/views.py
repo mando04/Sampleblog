@@ -33,7 +33,7 @@ def usersRegister(request):
 
 def loginUser(request):
     context = {'form': loginUserForm }
-    
+
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     
@@ -44,28 +44,25 @@ def loginUser(request):
             password = request.POST['password']
             user = authenticate(username=user, \
                                 password=password)
-        else:
-            return render_to_response('login.html', { 'form':form }, context_instance=RequestContext(request))
-        if user != None:
-            if user.is_active:
-                login(request, user)
-                # Redirect to a Success page
-                return HttpResponseRedirect('/')
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    error = "Account is diabled please email the Site Administrator"
+                    #return a 'disabled account' error message
+                    context.update({'error':error})
+                    return render_to_response('login.html', context, context_instance=RequestContext(request))
             else:
-                error = "Account is diabled please email the Site Administrator"
-                #return a 'disabled account' error message
+                error = "Username or password was incorrect!"
                 context.update({'error':error})
+                # return an 'invalid login' error page
                 return render_to_response('login.html', context, context_instance=RequestContext(request))
         else:
-            error = "Username or password was incorrect!"
-            context.update({'error':error})
-            # return an 'invalid login' error page
-            return render_to_response('login.html', context, context_instance=RequestContext(request))
-        
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('/')
-    
+            return render_to_response('login.html', { 'form':form }, context_instance=RequestContext(request))
+
     return render_to_response('login.html', context, context_instance=RequestContext(request))
+
 def logoutUser(request):
     logout(request)
     return HttpResponseRedirect('/')

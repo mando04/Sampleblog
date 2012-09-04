@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.index', name='home'),
     url(r'^login/$', 'usersAuth.views.loginUser', name='login'),
+    url(r'^blog/post/$', 'blog.views.userBlogPost', name='post'),
     url(r'^logout/$', 'usersAuth.views.logoutUser', name='logout'),
     url(r'^register/$', 'usersAuth.views.usersRegister', name='register'),
     url(r'^posts/(?P<userName>[-\w]+)/all/$', 'blog.views.allUserPosts'),

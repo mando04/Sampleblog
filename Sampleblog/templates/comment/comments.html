@@ -19,13 +19,14 @@
     <ul>
         <label for="id_name">Name: {{ user }}</label>
           <div class="controls">
+            <input type='hidden' name='name' value='{{user}}' />
             <textarea width=150px  name="text" id="textarea" rows="3" tabindex="4"></textarea>
           </div>
         <input class="btn btn-primary" type="submit" value="Add Post"> - {% if Error %}{{ Error }}{% endif %}<br>
     </ul>
   </form>
   {% else %}
-    <p>You must be signed in to post</p>
+    <p>You must be <a href="{% url login %}?path=/comment/comments.html">signed</a> in to post</p>
   {% endif %}
 {% endblock %}
 

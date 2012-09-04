@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block webStylez %}
+  <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/docs.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}js/google-code-prettify/prettify.css" rel="stylesheet">
+<title>Mando Blog</title>
+{% endblock %}
+
+{% block commentForms %}
+  {% if user.is_authenticated %}
+
+  <ul>
+  <h1>Post!</h1>
+  </ul>
+  <form method="post" action="{% url post %}">
+    {% csrf_token %}
+    <ul>
+        <label for="id_name">Name: {{ user }}</label>
+          <div class="controls">
+            <input type='hidden' name='author' value='{{user}}' />
+            {{ form.topic }} {{ form.blogDate}}<br>
+            <textarea width=150px  name="content" id="textarea" rows="3" tabindex="4"></textarea>
+          </div>
+        <input class="btn btn-primary" type="submit" value="Add Post"> - {% if Error %}{{ Error }}{% endif %}<br>
+    </ul>
+  </form>
+  {% else %}
+    <p>You must be <a href="{% url login %}">signed</a> in to post</p>
+  {% endif %}
+{% endblock %}

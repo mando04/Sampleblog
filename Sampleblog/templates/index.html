@@ -8,5 +8,5 @@
 {% endblock %}
 
    {% block content %}
-      {% if Post %}{% for i in Post %}<div class="bs-docs-content"><a href="/posts/{{i.author.fname}}/all/">{{ i.author.fname }}</a> - {{ i.blogDate }} - <small><small><strong>{{ i.topic }}</strong></small></small>...<hr>{{i.content|safe}}</div>comment{% endfor %}{% else %}No Content!{% endif %}<p>
+      {% if Post %}{% for i in Post %}<div class="bs-docs-content"><a href="/posts/{{i.author}}/all/">{{ i.author }}</a> - {{ i.blogDate }} - <small><small><strong>{{ i.topic }}</strong></small></small>...<hr>{{i.content|safe}}</div>comment{% endfor %}{% else %}No Content!{% endif %}<p>
    {% endblock content %}

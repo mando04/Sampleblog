@@ -17,10 +17,9 @@
   <form method="post" action="{% url comment %}">
     {% csrf_token %}
     <ul>
-        <input type="text" name="name" placeholder="Name" required><br>
-        <input type="email" name="email" placeholder="email(not required)"><br>
+        <label for="id_name">Name: {{ user }}</label>
           <div class="controls">
-            <textarea name="text" id="textarea" cols="50" rows="10" tabindex="4"></textarea>
+            <textarea width=150px  name="text" id="textarea" rows="3" tabindex="4"></textarea>
           </div>
         <input class="btn btn-primary" type="submit" value="Add Post"> - {% if Error %}{{ Error }}{% endif %}<br>
     </ul>

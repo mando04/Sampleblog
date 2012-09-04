@@ -6,6 +6,7 @@ import datetime,sys,os
 from blog.models import blogPost, Author
 from usersAuth.models import userAccount
 from django.db import IntegrityError
+from django.contrib.auth.models import User
 
 def index(request):
     post = blogPost.objects.all().order_by('-blogDate')
@@ -16,6 +17,6 @@ def index(request):
 
 
 def allUserPosts(request, userName):
-    authorName = Author.objects.filter(fname=userName)
-    userPosts = blogPost.objects.filter(author=authorName)
+    authorPost = User.objects.filter(username=userName)
+    userPosts = blogPost.objects.filter(author=authorPost)[:]
     return render_to_response('index.html', { 'Post': userPosts }, context_instance=RequestContext(request))

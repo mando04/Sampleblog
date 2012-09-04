@@ -9,8 +9,17 @@ def usersRegister(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     if request.method == ['POST']:
-        pass
-    
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['password'])
+            user.save()
+            USER = user.get_profile()
+            USER.name = form.cleaned_data['name']
+            USER.bday = form.cleaned_data['bday']
+            USER.save()
+            return HttpResponseRedirect('/loggedin')
+        
+            
     else:
         """ user is not submitting a form Show blank form"""
         form = RegisterForm()
@@ -30,6 +39,7 @@ def loginUser(request):
                 login(request, user)
                 
                 # Redirect to a Success page
+                HttpResponseRedirect('/')
             else:
                 error = "Account is diabled please email the Site Administrator"
                 #return a 'disabled account' error message
@@ -40,7 +50,8 @@ def loginUser(request):
             context.update({'error':error})
             # return an 'invalid login' error page
             return render_to_response('login.html', context, context_instance=RequestContext(request))
-    
+        HttpreponseRedirect('/')
+
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     

@@ -8,6 +8,7 @@ class userAccount(models.Model):
     user = models.OneToOneField(User)
     bday = models.DateField()
     name = models.CharField(max_length=100)
+    email = models.EmailField()
 
     def __unicode__(self):
         return self.name

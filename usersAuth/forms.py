@@ -15,7 +15,7 @@ class RegisterForm(ModelForm):
         model = userAccount
         exclude = ('user', userAccount)
 
-    def clearn_username(self):
+    def clean_username(self):
         username = self.cleaned_data['username']
         try:
             User.objects.get(username=username)
@@ -30,3 +30,7 @@ class RegisterForm(ModelForm):
             raise forms.ValidationError("The Passwords didn't match, please try again")
         return password
 
+class loginUserForm(forms.Form):
+    username = forms.CharField(label=(u'Username'))
+    password = forms.CharField(label=(u'Password'), widget=forms.PasswordInput(render_value=False))
+    

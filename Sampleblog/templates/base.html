@@ -30,7 +30,9 @@
      <li class="nav-header">
       Blog
       </li>
-      {% if user.is_authenticated %}{% else %}
+      {% if user.is_authenticated %}
+        <a href="{% url logout %}">logout</a>
+      {% else %}
       <li>
         <a href="{% url login %}">Log in</a>
       </li>

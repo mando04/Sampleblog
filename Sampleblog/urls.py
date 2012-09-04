@@ -8,14 +8,15 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.index', name='home'),
-    url(r'^login/$', 'usersAuth.views.login', name='login'),
+    url(r'^login/$', 'usersAuth.views.loginUser', name='login'),
+    url(r'^logout/$', 'usersAuth.views.logoutUser', name='logout'),
     url(r'^register/$', 'usersAuth.views.usersRegister', name='register'),
     url(r'^posts/(?P<userName>[-\w]+)/all/$', 'blog.views.allUserPosts'),
     url(r'^comment/allcomments/(?P<commentName>[-\w]+)/all/$', 'comment.views.allUserComments'),
     url(r'^comment/comments.html$', 'comment.views.index', name='comment'),
     
     #display static content
-    #url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : STATIC_ROOT}),
     # url(r'^$', 'Sampleblog.views.home', name='home'),
     # url(r'^Sampleblog/', include('Sampleblog.foo.urls')),
 

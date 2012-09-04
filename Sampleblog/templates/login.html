@@ -7,9 +7,11 @@
     //-->
   </script>
   {% else %}
-  <form name="submit" action="{% url register %}" method="POST">{% csrf_token %}
+  <form name="submit" action="{% url login %}" method="POST">{% csrf_token %}
   {{ form }}
-  <input type="submit" value="Go!" />
-  </form>
+  <br>
+  <input class="btn btn-primary" type="submit" value="Login">
+  </form><br>
+  {% if error %}<strong>Username/Password incorrect!</strong>{% endif %}
   {% endif %}
 {% endblock content %}

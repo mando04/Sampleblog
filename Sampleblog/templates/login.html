@@ -13,6 +13,6 @@
   <br>
   <input class="btn btn-primary" type="submit" value="Login"> - <small><a href="/login/forgotpassword">forgot password</a> or <a href="{% url register %}">	Sign up</a>
   </form><br>
-  {% if error %}<strong>Username/Password incorrect!</strong>{% endif %}
+  {% if error %}<strong>{{ error }}</strong>{% endif %}
   {% endif %}
 {% endblock content %}

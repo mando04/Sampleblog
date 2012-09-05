@@ -8,7 +8,7 @@ from blog.forms import UserBlogFormPost
 import datetime
 
 def index(request):
-    post = blogPost.objects.all().order_by('-blogDate')
+    post = blogPost.objects.all().order_by('-blogDate')[:]
     stuff = Context({
         'Post': post
     })
@@ -31,10 +31,11 @@ def userBlogPost(request):
         post.author = request.user
         post.topic = topic
         post.content = content
-            
+        
         if topic and content is not None:
             post.save()
-            return HttpResponseRedirect(reverse('blog.views.index'))
+            userPosts = blogPost.objects.all().order_by('-blogDate')[:]
+            return render_to_response('index.html', { 'Post': userPosts }, context_instance=RequestContext(request))
         else:
             error = "All fields are required to post!"
             post = blogPost.objects.all().order_by(-dateP)[:100]

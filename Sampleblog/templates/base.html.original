@@ -1,0 +1,58 @@
+<html>
+<head>
+  {% block webStylez %}
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <title>Mando Blog</title>
+  {% endblock %}
+</head>
+<body>
+<div class="row-fluid">
+<div class="span10">
+{% block topNav %}
+            <center>Welcome....</center>
+{% endblock %}
+</div>
+<div class="span10">
+   {% block rightNav %}
+   <div class="span2">
+    <ul class="nav nav-list">
+     <li class="nav-header">
+       Navigation
+      </li>
+      <li>
+        <a href="{% url home %}">Home</a>
+      </li>
+      <li>
+        <a href="{% url comment %}">Comments</a>
+      </li>
+     </li>
+     <li class="nav-header">
+      Blog
+      </li>
+      {% if user.is_authenticated %}
+        <li>
+        <a href="{% url logout %}">logout</a>
+        </li>
+        <li>
+        <a href="{% url post %}">Post!</a>
+        </li>
+      {% else %}
+      <li>
+        <a href="{% url login %}">Log in</a>
+      </li>
+      {% endif %}
+      </ul>
+   </div>
+   {% endblock rightNav %}
+   <div class="span10">
+      {% block content %}
+      {% if Post %}{% for i in Post %} {{ i.name }} - said on  <small><small>{{ i.cDate }}</small></small>...<br>{{i.text}}<P>{% endfor %}{% endif %}
+      {% endblock content %}
+      {% block commentForms %}
+      {% endblock commentForms %}
+   </div>
+</div>
+</div>
+</body>
+</html>

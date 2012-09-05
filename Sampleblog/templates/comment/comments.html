@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 
-{% block webStylez %}
-  <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}css/docs.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}js/google-code-prettify/prettify.css" rel="stylesheet">
-<title>Mando Blog</title>
-{% endblock %}
-
-{% block commentForms %}
+{% block forms %}
   {% if user.is_authenticated %}
 
   <ul>
@@ -35,7 +27,15 @@
     {% if Post %}
       {% for i  in Post %}
         <tr><td>
-        <a href="/comment/allcomments/{{ i.name }}/all/">{{ i.name }}</a> - said on  <small><small>{{ i.cDate }}</small></small>...
+        <a href="/comment/allcomments/{{ i.name }}/all/">{{ i.name }}</a> - said on  <small><small>{{ i.cDate }}</small></small>...{% if user.is_authenticated %}<a href="/comment/delete/{{ i.id }}"><small>Delete!</small></a>
+        {% if error %}
+	<script type="text/javascript">
+	window.onload= loaded;
+	function loaded()
+	{
+	alert('{{ error }}');
+	}
+	</script>{% endif %}{% endif %}
         </td></tr>
         <tr><td>
         {{ i.text }}

@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^register/$', 'usersAuth.views.usersRegister', name='register'),
     url(r'^posts/(?P<userName>[-\w]+)/all/$', 'blog.views.allUserPosts'),
     url(r'^comment/allcomments/(?P<commentName>[-\w]+)/all/$', 'comment.views.allUserComments'),
+    url(r'^comment/delete/(?P<comment_id>\d+)$', 'comment.views.deletepost'),
     url(r'^comment/comments.html$', 'comment.views.index', name='comment'),
     
     #display static content

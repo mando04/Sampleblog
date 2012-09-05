@@ -10,6 +10,8 @@ def usersRegister(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     if request.method == 'POST':
+        REFERER = request.META['HTTP_REFERER']
+
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['username'], \
@@ -21,8 +23,8 @@ def usersRegister(request):
                                  bday=form.cleaned_data['bday'], \
                                  email=form.cleaned_data['email'])
             USER_P.save()
-            
-            return HttpResponseRedirect('/loggedin')
+            login(request, user)
+            return HttpResponseRedirect(REFERER)
         else:
             return render_to_response('register.html', { 'form':form }, context_instance=RequestContext(request))    
     else:
@@ -65,4 +67,4 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

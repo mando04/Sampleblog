@@ -35,3 +35,16 @@ def allUserComments(request, commentName):
     userComments = User.objects.filter(username=commentName)
     userComments = Post.objects.filter(name=userComments)
     return render_to_response('comment/comments.html', { 'Post': userComments }, context_instance=RequestContext(request))
+
+def deletepost(request, comment_id):
+    post = Post.objects.all().order_by('-cDate')[:5]
+
+    comment = Post.objects.get(pk=comment_id)
+    if request.user == comment.name:
+        print comment
+        comment.delete()
+    else:
+        error = "You can't delete other people posts!"
+        return render_to_response('comment/comments.html', { 'error' : error, 'Post' : post }, context_instance=RequestContext(request))
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

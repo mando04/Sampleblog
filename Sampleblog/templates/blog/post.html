@@ -1,19 +1,7 @@
 {% extends "base.html" %}
 
-{% block webStylez %}
-  <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}css/docs.css" rel="stylesheet">
-  <link href="{{STATIC_URL}}js/google-code-prettify/prettify.css" rel="stylesheet">
-<title>Mando Blog</title>
-{% endblock %}
-
-{% block commentForms %}
-{% endblock %}
-
 {% block content %}
   {% if user.is_authenticated %}
-
   <ul>
   <h1>Post!</h1>
   </ul>

@@ -30,6 +30,7 @@ def index(request):
     })
     return render_to_response('comment/comments.html', stuff, context_instance=RequestContext(request))
 
+
 def allUserComments(request, commentName):
     userComments = User.objects.filter(username=commentName)
     userComments = Post.objects.filter(name=userComments)

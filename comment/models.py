@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.ForeignKey(User, blank=True, null=True)
     text = models.TextField()
     cDate = models.DateTimeField()
     email = models.EmailField(blank=True)
+    

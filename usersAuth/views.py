@@ -32,7 +32,7 @@ def usersRegister(request):
         return render_to_response('register.html', context, context_instance=RequestContext(request))
 
 def loginUser(request):
-    context = {'form': loginUserForm }
+    context = {'form': loginUserForm}
 
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')

@@ -68,3 +68,11 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def userprofile(request, username):
+    print username
+    if request.user.is_authenticated:
+        print "User %s is authenticated show editable profile"%username
+        profile = usersAuth.objects.get(name=username)
+    return render_to_response('profile.html', { 'profile' : profile }, context_instance=RequestContext(request))
+

@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^comment/allcomments/(?P<commentName>[-\w]+)/all/$', 'comment.views.allUserComments'),
     url(r'^comment/delete/(?P<comment_id>\d+)$', 'comment.views.deletepost'),
     url(r'^comment/comments.html$', 'comment.views.index', name='comment'),
+    url(r'^profile/(?P<username>[-\w]+)/$', 'usersAuth.views.userprofile', name='profile'),
+
     
     #display static content
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : STATIC_ROOT}),

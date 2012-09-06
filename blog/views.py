@@ -35,10 +35,13 @@ def userBlogPost(request):
         if topic and content is not None:
             post.save()
             userPosts = blogPost.objects.all().order_by('-blogDate')[:]
+            print "Saving post "
+            print  post
             return render_to_response('index.html', { 'Post': userPosts }, context_instance=RequestContext(request))
         else:
             error = "All fields are required to post!"
             post = blogPost.objects.all().order_by(-dateP)[:100]
+            print error + " - " + post
             return render_to_response('index.html', \
                                       { 'Post' : post,
                                         'Error' : error }, \

@@ -2,7 +2,7 @@
    {% block content %}
       {% if Post %}
       {% for i in Post %}
-          <div class="bs-docs-content"><a href="/posts/{{i.author}}/all/">{{ i.author }}</a> - {{ i.blogDate }} - <small><small><strong>{{ i.topic }}</strong></small></small>...
+          <div class="bs-docs-content"><a href="/posts/{{i.author}}/all/">{{ i.author }}</a> -{{ i.topic }}<small><small{{ i.blogDate }}</small></small>...
          <p>{{i.content}}</div><hr>
        {% endfor %}
        {% else %}No Content!{% endif %}

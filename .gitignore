@@ -4,3 +4,5 @@
 *.db
 *.json
 python
+.project
+.pydevproject
